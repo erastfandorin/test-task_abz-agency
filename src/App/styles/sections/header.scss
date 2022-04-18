@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  background-color: #FFFFFF;
+}
+
+.header__menu {
+  display: flex;
+}
+
+.header__menu-item {
+  &:nth-child(n) {
+    margin-left: 10px;
+  }
+  &:first-child  {
+    margin-left: 0;
+  }
+}

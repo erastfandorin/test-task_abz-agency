@@ -1,0 +1,35 @@
+.heading {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 40px; // refactor
+  color: $text-color;
+}
+
+.btn {
+  display: inline-block;
+  min-width: 100px;
+  height: 34px;
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 2.2;
+  text-align: center;
+  color: $text-color;
+  background-color: $primary-color;
+  border-radius: 80px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out 0s;
+
+  &:hover {
+    background-color: #FFE302;
+  }
+  &.btn-disable {
+    color: #FFFFFFDE;
+    background-color: #B4B4B4;
+  }
+}
+
+// inputs
