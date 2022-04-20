@@ -1,21 +1,16 @@
 .heading {
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: 400;
   font-size: 40px;
   line-height: 40px; // refactor
   color: $text-color;
+  text-align: center;
 }
 
 .btn {
+  box-sizing: border-box;
   display: inline-block;
   min-width: 100px;
-  height: 34px;
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 2.2;
+  padding: 9px 18px;
+  line-height: 1;
   text-align: center;
   color: $text-color;
   background-color: $primary-color;
@@ -31,5 +26,30 @@
     background-color: #B4B4B4;
   }
 }
+.input {
+  padding: 14px 16px;
+  color: #7E7E7E;
+  background: #F8F8F8;
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  outline: none;
+}
+.label {
+  position: absolute;
+  top: 20px;
+  left: 13px;
+  width: max-content;
+  height: min-content;
+  padding: 0 4px;
+  font-size: 16px;
+  color: #7E7E7E;
+  line-height: 1;
+  background-color: $bg-color;
+  transition: 0.2s all;
+}
 
-// inputs
+.input:focus ~ .label,
+.input:not(:placeholder-shown).input:not(:focus) ~ .label {
+  top: -6px;
+  font-size: 12px;
+}

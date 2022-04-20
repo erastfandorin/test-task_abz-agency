@@ -4,7 +4,7 @@ import logo from '../../assets/img/Logo.svg';
 function Header() {
   return (
     <header className="header">
-      <a href="/">
+      <a href="/" className="header__logo">
         <img src={logo} alt="Logo TestTask" />
       </a>
       <nav>

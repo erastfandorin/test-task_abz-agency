@@ -5,9 +5,13 @@
   min-height: 60px;
   background-color: #FFFFFF;
 }
+.header__logo {
+  margin-right: 5px;
+}
 
 .header__menu {
   display: flex;
+  align-items: center;
 }
 
 .header__menu-item {
