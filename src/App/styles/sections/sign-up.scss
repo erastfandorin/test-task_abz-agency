@@ -7,25 +7,28 @@
   margin: 0 auto;
 }
 .sign-up__form-field-list {
-  margin-bottom: 64px;
+  margin-bottom: 49px;
 }
 .sign-up__form-field {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 47px;
 }
 .sign-up__input {
   box-sizing: border-box;
   width: 100%;
 }
 .sign-up__helper-text {
-  visibility: hidden;
+  position: absolute;
+  bottom: -24px;
   padding-left: 16px;
-  color: #7E7E7E;
+  color: #7e7e7e;
   font-size: 12px;
 }
 .sign-up__helper-text--active {
   visibility: visible;
 }
+
+// radio btns
 .select-position {
   margin-bottom: 39px;
 }
@@ -40,28 +43,29 @@
   clip: rect(0 0 0 0);
 
   &:checked ~ label::before {
-    background: radial-gradient(#00BDD3 4px, transparent 5px);
-    border: 1px solid #00BDD3;
+    background: radial-gradient($secondary-color 4px, transparent 5px);
+    border: 1px solid $secondary-color;
   }
 }
 .select-position__radio-btn-list label {
   &::before {
-    content: "";
+    content: '';
     display: inline-block;
     vertical-align: middle;
     width: 18px;
     height: 18px;
     margin-right: 12px;
     border-radius: 50%;
-    border: 1px solid #D0CFCF;
-    transition: all .15s;
+    border: 1px solid #d0cfcf;
+    transition: all 0.15s;
   }
 }
 
+// input file
 .sign-up__input-file {
   color: transparent;
   &::before {
-    content: "Upload";
+    content: 'Upload';
     position: absolute;
     left: 0px;
     top: 0px;
@@ -79,7 +83,8 @@
   position: absolute;
   top: 16px;
   left: 99px;
-  color: #7E7E7E;
+  color: #7e7e7e;
+  pointer-events: none;
 }
 .sign-up__form-btn {
   display: block;

@@ -1,82 +1,8 @@
 @import "./variables.scss";
-
-// reset default styles
-*,
-*::before,
-*::after {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-ul, ol, li {
-  list-style-type: none;
-}
-img {
-  vertical-align: top;
-}
-h1, h2, h3, h4, h5, h6 {
-  font-weight: inherit;
-  font-size: inherit;
-}
-html, body {
-  height: 100%;
-  line-height: 1;
-}
-
-body {
-  box-sizing: border-box;
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
-  color: $text-color;
-  background-color: $bg-color;
-}
-input, textarea, select, button {
-  font: inherit;
-}
-
-// [class*="__container"] {
-//   max-width: 328px;
-//   margin: 0 auto;
-// }
-
-section, header, footer {
-  padding: 0 16px;
-}
-
-// @media (min-width: 575.98px){
-//   section, header, footer {
-//     padding: 0 calc(50vw - 176px);
-//   }
-// }
-
-@media (min-width: $tablet-width){
-  section, header, footer {
-    padding: 0 calc(50vw - 352px);
-  }
-}
-
-@media (min-width: $desktop-width) {
-  section, header, footer {
-    padding: 0 calc(50vw - 452px);
-  }
-}
-
-@media (min-width: $large-desktop-width){
-  header {
-    padding: 0 calc(50vw - 585px);
-  }
-  section {
-    max-width: 1168px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-  }
-}
-
 @import "./bem-blocks.scss";
+
+@import "./global.scss";
+
 @import "./app.scss";
 @import "./sections/header.scss";
 @import "./sections/poster.scss";

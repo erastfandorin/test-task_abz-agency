@@ -4,7 +4,7 @@ import User from './User/User';
 
 function Users() {
   return (
-    <section className="users">
+    <section className="users" id="users">
       <h2 className="users__heading heading">Working with GET request</h2>
       <ul className="users__list">
         <User />
