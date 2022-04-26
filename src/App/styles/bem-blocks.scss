@@ -27,6 +27,7 @@
     background-color: #B4B4B4;
   }
 }
+
 .input {
   padding: 14px 16px;
   color: #7E7E7E;
@@ -53,4 +54,31 @@
 .input:not(:placeholder-shown).input:not(:focus) ~ .label {
   top: -6px;
   font-size: 12px;
+}
+
+// tooltip
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background-color: $text-color;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 3px 16px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -50%;
+  // transition: opacity 0.3s ease-in-out 0.1s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-scroll';
 
 function Poster() {
   return (
@@ -14,9 +15,9 @@ function Poster() {
           in mind. They should also be excited to learn, as the world of
           Front-End Development keeps evolving.
         </p>
-        <a href="/" className="btn">
+        <Link className="btn" to="sign-up" smooth offset={-140} duration={500}>
           Sign up
-        </a>
+        </Link>
       </div>
     </section>
   );

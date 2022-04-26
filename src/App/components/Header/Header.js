@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-scroll';
+
 import logo from '../../assets/img/Logo.svg';
 
 function Header() {
@@ -10,14 +12,20 @@ function Header() {
       <nav>
         <ul className="header__menu">
           <li className="header__menu-item">
-            <a href="#users" className="btn">
+            <Link className="btn" to="users" smooth offset={-88} duration={500}>
               Users
-            </a>
+            </Link>
           </li>
           <li className="header__menu-item">
-            <a href="#sign-up" className="btn">
+            <Link
+              className="btn"
+              to="sign-up"
+              smooth
+              offset={-140}
+              duration={500}
+            >
               Sign up
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

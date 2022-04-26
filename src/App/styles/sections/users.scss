@@ -58,10 +58,14 @@
 }
 .card__list li {
   width: 100%;
+  text-align: center;
+}
+.card__list .card__text {
+  display: block;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
 }
 .card__photo {
   margin-bottom: 20px;
