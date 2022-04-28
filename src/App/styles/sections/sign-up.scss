@@ -9,34 +9,28 @@
 .sign-up__form-field-list {
   margin-bottom: 49px;
 }
-.sign-up__form-field {
+.sign-up__form-field-list > li {
   position: relative;
   margin-bottom: 47px;
+
+  &:nth-child(3) {
+    margin-bottom: 44px;
+  }
 }
 .sign-up__input {
   box-sizing: border-box;
   width: 100%;
 }
-.sign-up__helper-text {
-  position: absolute;
-  bottom: -24px;
-  padding-left: 16px;
-  color: #7e7e7e;
-  font-size: 12px;
-}
-.sign-up__helper-text--active {
-  visibility: visible;
-}
 
 // radio btns
-.select-position {
+.sign-up__form-field-list > .select-position {
   margin-bottom: 39px;
 }
 .select-position__heading {
   margin-bottom: 9px;
 }
 .select-position__radio-btn-list li {
-  margin-bottom: 7px;
+  margin-bottom: 2px;
 }
 .select-position__radio-btn-list input {
   position: absolute;
@@ -46,16 +40,23 @@
     background: radial-gradient($secondary-color 4px, transparent 5px);
     border: 1px solid $secondary-color;
   }
+  &:focus-visible ~ label {
+    color: #00BDD3;
+  }
 }
 .select-position__radio-btn-list label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
   &::before {
     content: '';
-    display: inline-block;
-    vertical-align: middle;
+    flex: 0 0 18px;
     width: 18px;
     height: 18px;
     margin-right: 12px;
     border-radius: 50%;
+    background: radial-gradient(transparent 4px, transparent 5px);
     border: 1px solid #d0cfcf;
     transition: all 0.15s;
   }
@@ -78,6 +79,9 @@
     background-color: transparent;
     visibility: hidden;
   }
+  &:focus::before {
+    border: 1px solid #00BDD3;
+  }
 }
 .sign-up__input-file-name {
   position: absolute;
@@ -85,6 +89,12 @@
   left: 99px;
   color: #7e7e7e;
   pointer-events: none;
+
+  // style for long string
+  width: 66%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sign-up__form-btn {
   display: block;

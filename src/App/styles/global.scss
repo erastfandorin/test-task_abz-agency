@@ -36,6 +36,10 @@ input, textarea, select, button {
   font: inherit;
 }
 
+:focus-visible {
+  outline-color: $secondary-color;
+  outline-offset: 1px;
+ }
 // add media query
 section, header, footer {
   padding: 0 16px;

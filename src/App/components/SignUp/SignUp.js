@@ -1,93 +1,122 @@
 import React, { useState } from 'react';
+import Input from './Input/Input';
+import withFormValidate from '../HOC/withFormValidate';
 
-import TextField from './TextField/TextField';
-import RadioBtn from './RadioBtn/RadioBtn';
-import FileField from './FileField/FileField';
+const Position = {
+  FRONTEND: 'frontend',
+  BACKEND: 'backend',
+  DESIGNER: 'designer',
+  QA: 'qa',
+};
 
-const defaultTextFields = [
-  { key: '1', name: 'name', value: '', label: 'Your name', helpText: '' },
-  { key: '2', name: 'email', value: '', label: 'Email', helpText: '' },
-  {
-    key: '3',
-    name: 'phone',
-    value: '',
-    label: 'Phone',
-    helpText: '+38 (XXX) XXX - XX - XX',
-  },
-];
-const defaultRadioBtns = [
-  { key: '1', name: 'frontend', label: 'Frontend developer', isChecked: true },
-  { key: '2', name: 'backend', label: 'Backend developer', isChecked: false },
-  { key: '3', name: 'designer', label: 'Designer', isChecked: false },
-  { key: '4', name: 'qa', label: 'QA', isChecked: false },
-];
+function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
+  const [fileLabel, setFileLabel] = useState('Upload your photo');
+  const handleChangeFile = e => {
+    handleInput(e);
 
-function SignUp() {
-  const [textFields, setTextFields] = useState(defaultTextFields);
-  const [radioBtns, setRadioBtns] = useState(defaultRadioBtns);
-
-  const handleChangeTextField = e => {
-    textFields.forEach((item, index) => {
-      if (item.name === e.target.name) {
-        const newTextFields = [...textFields];
-        newTextFields[index].value = e.target.value;
-        setTextFields(newTextFields);
-      }
-    });
-  };
-  const handleChangeRadioBtn = e => {
-    const newTextFields = [];
-    radioBtns.forEach((item, index) => {
-      // reset all radio btns
-      newTextFields.push(item);
-      newTextFields[index].isChecked = false;
-
-      if (item.name === e.target.name) {
-        newTextFields[index].isChecked = true;
-      }
-    });
-    setRadioBtns(newTextFields);
-  };
-  const handleChangeFileField = e => {
-    //
-    //
-    //
+    const newLabel = e.target.files.length
+      ? e.target.files[0].name
+      : 'Upload your photo';
+    setFileLabel(newLabel);
   };
 
   return (
     <section className="sign-up" id="sign-up">
       <h2 className="sign-up__heading heading">Working with POST request</h2>
-      <form action="#" className="sign-up__form">
+      <form action="#" className="sign-up__form" onSubmit={handleSubmit}>
         <ul className="sign-up__form-field-list">
-          {textFields.map(input => (
-            <TextField
-              key={input.key}
-              name={input.name}
-              value={input.value}
-              label={input.label}
-              helpText={input.helpText}
-              handleChangeTextField={handleChangeTextField}
-            />
-          ))}
+          <Input
+            id="name"
+            name="name"
+            value={data.name}
+            error={errors.name}
+            label="Your name"
+            classNameInput="sign-up__input input"
+            classNameLabel="label"
+            placeholder=" "
+            onChange={handleInput}
+            onBlur={handleBlur}
+          />
+          <Input
+            id="email"
+            name="email"
+            value={data.email}
+            error={errors.email}
+            label="Email"
+            classNameInput="sign-up__input input"
+            classNameLabel="label"
+            placeholder=" "
+            onChange={handleInput}
+            onBlur={handleBlur}
+          />
+          <Input
+            id="phone"
+            name="phone"
+            value={data.phone}
+            error={errors.phone}
+            label="Phone"
+            classNameInput="sign-up__input input"
+            classNameLabel="label"
+            placeholder=" "
+            helpText="+38 (XXX) XXX - XX - XX"
+            onChange={handleInput}
+            onBlur={handleBlur}
+          />
           <li className="sign-up__form-field sign-up__select-position select-position">
             <fieldset>
               <legend className="select-position__heading">
                 Select your position
               </legend>
               <ul className="select-position__radio-btn-list">
-                {radioBtns.map(btn => (
-                  <RadioBtn
-                    key={btn.key}
-                    name={btn.name}
-                    label={btn.label}
-                    isChecked={btn.isChecked}
-                    handleChangeRadioBtn={handleChangeRadioBtn}
-                  />
-                ))}
+                <Input
+                  id="frontend"
+                  type="radio"
+                  name="position"
+                  value="frontend"
+                  label="Frontend developer"
+                  checked={data.position === Position.FRONTEND}
+                  onChange={handleInput}
+                />
+                <Input
+                  id="backend"
+                  type="radio"
+                  name="position"
+                  value="backend"
+                  label="Backend developer"
+                  checked={data.position === Position.BACKEND}
+                  onChange={handleInput}
+                />
+                <Input
+                  id="designer"
+                  type="radio"
+                  name="position"
+                  value="designer"
+                  label="Designer"
+                  checked={data.position === Position.DESIGNER}
+                  onChange={handleInput}
+                />
+                <Input
+                  id="qa"
+                  type="radio"
+                  name="position"
+                  value="qa"
+                  label="QA"
+                  checked={data.position === Position.QA}
+                  onChange={handleInput}
+                />
               </ul>
             </fieldset>
           </li>
-          <FileField handleChangeFileField={handleChangeFileField} />
+          <Input
+            id="photo"
+            type="file"
+            name="photo"
+            label={fileLabel}
+            classNameInput="sign-up__input sign-up__input-file input"
+            classNameLabel="sign-up__input-file-name"
+            accept=".jpg, .jpeg"
+            onChange={handleChangeFile}
+          />
         </ul>
         <button type="submit" className="sign-up__form-btn btn btn-disable ">
           Sign up
@@ -97,4 +126,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default withFormValidate(SignUp);

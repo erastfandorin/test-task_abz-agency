@@ -12,7 +12,7 @@ function Header() {
       <nav>
         <ul className="header__menu">
           <li className="header__menu-item">
-            <Link className="btn" to="users" smooth offset={-88} duration={500}>
+            <Link className="btn" to="users" smooth offset={-88} duration={500} tabIndex="0">
               Users
             </Link>
           </li>
@@ -23,6 +23,7 @@ function Header() {
               smooth
               offset={-140}
               duration={500}
+              tabIndex="0"
             >
               Sign up
             </Link>

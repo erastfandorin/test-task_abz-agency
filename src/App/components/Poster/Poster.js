@@ -15,7 +15,14 @@ function Poster() {
           in mind. They should also be excited to learn, as the world of
           Front-End Development keeps evolving.
         </p>
-        <Link className="btn" to="sign-up" smooth offset={-140} duration={500}>
+        <Link
+          className="btn"
+          to="sign-up"
+          smooth
+          offset={-140}
+          duration={500}
+          tabIndex="0"
+        >
           Sign up
         </Link>
       </div>
