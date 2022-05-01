@@ -46,11 +46,13 @@ section, header, footer {
 }
 @media (min-width: $tablet-width){
   section, header, footer {
+    min-width: 704px;
     padding: 0 calc(50vw - 352px);
   }
 }
 @media (min-width: $desktop-width) {
   section, header, footer {
+    min-width: 904px;
     padding: 0 calc(50vw - 452px);
   }
 }

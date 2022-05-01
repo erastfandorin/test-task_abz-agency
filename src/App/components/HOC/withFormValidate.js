@@ -4,21 +4,10 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validateRegEx';
-import getResolutionFileImg from '../../helpers/utilities';
+import { getResolutionFileImg } from '../../helpers/utilities';
+import { initialValues, validateFields} from "./initialValues";
 
-const initialValues = {
-  name: '',
-  email: '',
-  phone: '+380',
-  position: 'frontend',
-  photo: '',
-};
-const validateFields = {
-  name: '',
-  email: '',
-  phone: '',
-  photo: '',
-};
+
 
 function withFormValidate(WrappedComponent) {
   return function Wrapper(props) {

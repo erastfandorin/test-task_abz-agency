@@ -1,52 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
-
 import coveImg from '../../../assets/img/photo-cover.svg';
+import { getTextWidth } from '../../../helpers/utilities';
 
-const defaultTooltips = {
-  name: false,
-  position: false,
-  email: false,
-};
-const nameString = 'hi their';
-const emailString = 'Salvador Stewart Flynn Thomas Salva4444444444444';
-
-function User() {
+function User({photo, name, email, phone, position}) {
   const ref = useRef(null);
-  const [tooltips, setTooltips] = useState(defaultTooltips);
+  const [elementWidth, setElementWidth] = useState(0);
 
-  // get text width
-  const getTextWidth = (text, font) => {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-
-    context.font = font || getComputedStyle(document.body).font;
-
-    return context.measureText(text).width;
-  };
+  const userImg = photo ?? coveImg;
+  const phoneHref = `tel:${phone}`;
+  const emailHref = `mailto:${email}`;
 
   useEffect(() => {
-    // get element width
-    const elementWidth = ref.current ? ref.current.offsetWidth : 0;
-
-    const addTooltips = (name, email, position) => {
-      const stringList = [
-        ['name', name],
-        ['email', email],
-        ['position', position],
-      ];
-      const newTooltips = tooltips;
-
-      stringList.forEach(str => {
-        const textWidth = getTextWidth(str[1]);
-        // add tooltips if needs
-        if (elementWidth < textWidth) {
-          newTooltips[str[0]] = true;
-        }
-      });
-      setTooltips({ ...newTooltips });
-    };
-    addTooltips(nameString, emailString, emailString);
+    const elemWidth = ref.current ? ref.current.offsetWidth : 0;
+    setElementWidth(elemWidth);
   }, []);
+
+  const checkTooltipNeed = (string) => {
+    const textWidth = getTextWidth(string);
+    if (elementWidth < textWidth) {
+      return true;
+    }
+    return false;
+  };
 
   const addTooltip = text => <span className="tooltip-text">{text}</span>;
 
@@ -54,21 +29,22 @@ function User() {
     <li className="users__list-item card" ref={ref}>
       <ul className="card__list">
         <li className="card__photo">
-          <img src={coveImg} alt="User" />
+          <img src={userImg} alt="User" />
         </li>
         <li className="card__name tooltip">
-          <span className="card__text">{nameString}</span>
-          {tooltips.name ? addTooltip(nameString) : ''}
+          <span className="card__text">{name}</span>
+          {checkTooltipNeed(name) ? addTooltip(name) : ''}
         </li>
         <li className="card__position tooltip">
-          <span className="card__text">{emailString}</span>
-          {tooltips.email ? addTooltip(emailString) : ''}
+          <span className="card__text">{position}</span>
+          {checkTooltipNeed(position) ? addTooltip(position) : ''}
         </li>
         <li className="card__email tooltip">
-          <a href="mailto:nowhere@mozilla.org">444444</a>
+          <a href={emailHref}>{email}</a>
+          {checkTooltipNeed(email) ? addTooltip(email) : ''}
         </li>
         <li className="card__number">
-          <a href="tel:+491570156">+38 (098) 278 76 24</a>
+          <a href={phoneHref}>{phone}</a>
         </li>
       </ul>
     </li>

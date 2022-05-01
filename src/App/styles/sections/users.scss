@@ -40,11 +40,15 @@
     width: 344px;
     margin-bottom: 16px;
     margin-left: 0;
-    margin-right: 0;
+    
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
   }
   @media (min-width: $desktop-width) {
     width: 282px;
     margin-bottom: 29px;
+    margin-right: 0;
   }
   @media (min-width: $large-desktop-width) {
     width: 370px;
@@ -69,6 +73,9 @@
 }
 .card__photo {
   margin-bottom: 20px;
+}
+.card__photo img {
+  border-radius: 50%;
 }
 .card__name {
   margin-bottom: 20px;

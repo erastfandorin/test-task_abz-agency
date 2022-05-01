@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from './Input/Input';
-import withFormValidate from '../HOC/withFormValidate';
 
-const Position = {
-  FRONTEND: 'frontend',
-  BACKEND: 'backend',
-  DESIGNER: 'designer',
-  QA: 'qa',
-};
+import withFormValidate from '../HOC/withFormValidate';
+import { initialValues } from '../HOC/initialValues';
+import abzTestApi from '../../services/api/api';
 
 function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
   const [fileLabel, setFileLabel] = useState('Upload your photo');
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const result = await abzTestApi.getPositions();
+      setPositions([...result.positions]);
+      // active first radio btn
+      const firstRadioBtn = result.positions[0].name
+      initialValues.position = firstRadioBtn;
+    })();
+  }, []);
+
   const handleChangeFile = e => {
     handleInput(e);
 
@@ -68,42 +76,24 @@ function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
                 Select your position
               </legend>
               <ul className="select-position__radio-btn-list">
-                <Input
-                  id="frontend"
-                  type="radio"
-                  name="position"
-                  value="frontend"
-                  label="Frontend developer"
-                  checked={data.position === Position.FRONTEND}
-                  onChange={handleInput}
-                />
-                <Input
-                  id="backend"
-                  type="radio"
-                  name="position"
-                  value="backend"
-                  label="Backend developer"
-                  checked={data.position === Position.BACKEND}
-                  onChange={handleInput}
-                />
-                <Input
-                  id="designer"
-                  type="radio"
-                  name="position"
-                  value="designer"
-                  label="Designer"
-                  checked={data.position === Position.DESIGNER}
-                  onChange={handleInput}
-                />
-                <Input
-                  id="qa"
-                  type="radio"
-                  name="position"
-                  value="qa"
-                  label="QA"
-                  checked={data.position === Position.QA}
-                  onChange={handleInput}
-                />
+                {positions.map(position => {
+                  const correctIdName = `p_${position.name.replace(
+                    /\s/g,
+                    '_',
+                  )}`;
+                  return (
+                    <Input
+                      key={position.id}
+                      id={correctIdName}
+                      type="radio"
+                      name="position"
+                      value={position.name}
+                      label={position.name}
+                      checked={data.position === position.name}
+                      onChange={handleInput}
+                    />
+                  );
+                })}
               </ul>
             </fieldset>
           </li>
