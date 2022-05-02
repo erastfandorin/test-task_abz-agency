@@ -6,12 +6,12 @@ import {
 } from '../../helpers/validateRegEx';
 import { getResolutionFileImg } from '../../helpers/utilities';
 import { initialValues, validateFields} from "./initialValues";
+import abzTestApi from "../../services/api/api";
 
 
 
 function withFormValidate(WrappedComponent) {
   return function Wrapper(props) {
-    const [isFetching, setIsFetching] = useState(false);
     const [data, setData] = useState(initialValues);
     const [errors, setErrors] = useState(validateFields);
 
@@ -34,6 +34,7 @@ function withFormValidate(WrappedComponent) {
       );
       if (isValidate) {
         console.log('here We Send Data', data);
+        abzTestApi.postUser(data);
       } else {
         console.log('no valid data');
       }
@@ -45,6 +46,14 @@ function withFormValidate(WrappedComponent) {
     const validateForm = async (name, value) => {
       // validate photo
       if (name === 'photo') {
+        // photo field empty
+        if (!value) {
+          setErrors({
+            ...errors,
+            [name]: 'field must not be empty',
+          });
+          return false;
+        }
         // photo type
         if (!'image/jpeg' === value.type || !'image/jpg' === value.type) {
           setErrors({

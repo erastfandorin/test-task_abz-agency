@@ -14,7 +14,7 @@ function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
       const result = await abzTestApi.getPositions();
       setPositions([...result.positions]);
       // active first radio btn
-      const firstRadioBtn = result.positions[0].name
+      const firstRadioBtn = result.positions[0].id
       initialValues.position = firstRadioBtn;
     })();
   }, []);
@@ -87,9 +87,9 @@ function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
                       id={correctIdName}
                       type="radio"
                       name="position"
-                      value={position.name}
+                      value={position.id}
                       label={position.name}
-                      checked={data.position === position.name}
+                      checked={Number(data.position) === position.id}
                       onChange={handleInput}
                     />
                   );
@@ -101,6 +101,7 @@ function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
             id="photo"
             type="file"
             name="photo"
+            error={errors.photo}
             label={fileLabel}
             classNameInput="sign-up__input sign-up__input-file input"
             classNameLabel="sign-up__input-file-name"

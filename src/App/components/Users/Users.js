@@ -5,14 +5,17 @@ import abzTestApi from '../../services/api/api';
 
 function Users() {
   const [users, setUsers] = useState([]);
+  const [isLastPage, setIsLastPage] = useState(false);
+
   useEffect(() => {
     getUsers();
   }, []);
   const getUsers = async () => {
     const result = await abzTestApi.getUsers();
     // refactor: add sorted
-    setUsers([...users, ...result]);
-  }
+    setIsLastPage(result.lastPage);
+    setUsers([...users, ...result.users]);
+  };
 
   // console.log(users)
 
@@ -31,9 +34,11 @@ function Users() {
           />
         ))}
       </ul>
-      <button type='button' className="btn" onClick={getUsers}>
-        Show more
-      </button>
+      {!isLastPage && (
+        <button type="button" className="btn" onClick={getUsers}>
+          Show more
+        </button>
+      )}
     </section>
   );
 }

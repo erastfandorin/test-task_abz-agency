@@ -16,8 +16,10 @@ function User({photo, name, email, phone, position}) {
   }, []);
 
   const checkTooltipNeed = (string) => {
+    const paddingWidth = 40;
     const textWidth = getTextWidth(string);
-    if (elementWidth < textWidth) {
+    const resultWidth = textWidth + paddingWidth;
+    if (elementWidth < resultWidth) {
       return true;
     }
     return false;
@@ -40,11 +42,11 @@ function User({photo, name, email, phone, position}) {
           {checkTooltipNeed(position) ? addTooltip(position) : ''}
         </li>
         <li className="card__email tooltip">
-          <a href={emailHref}>{email}</a>
+          <a href={emailHref} className="card__text">{email}</a>
           {checkTooltipNeed(email) ? addTooltip(email) : ''}
         </li>
         <li className="card__number">
-          <a href={phoneHref}>{phone}</a>
+          <a href={phoneHref} className="card__text">{phone}</a>
         </li>
       </ul>
     </li>
