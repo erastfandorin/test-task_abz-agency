@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -9,13 +9,15 @@ import Users from './components/Users/Users';
 import SignUp from './components/SignUp/SignUp';
 
 function App() {
+  const [isFormSended, setIsFormSended] = useState(false);
+
   return (
     <div className="wrapper">
       <Header />
       <main className="main">
         <Poster />
-        <Users />
-        <SignUp />
+        <Users isFormSended={isFormSended} setIsFormSended={setIsFormSended} />
+        <SignUp setIsFormSended={setIsFormSended} />
       </main>
       <ToastContainer
         position="top-right"

@@ -3,21 +3,29 @@ import React, { useEffect, useState } from 'react';
 import User from './User/User';
 import abzTestApi from '../../services/api/api';
 
-function Users() {
+function Users({ isFormSended, setIsFormSended }) {
   const [users, setUsers] = useState([]);
   const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [isFormSended]);
   const getUsers = async () => {
-    const result = await abzTestApi.getUsers();
-    // refactor: add sorted
-    setIsLastPage(result.lastPage);
-    setUsers([...users, ...result.users]);
-  };
+    if (isFormSended) {
+      resetUserList();
+    }
 
-  // console.log(users)
+    const result = await abzTestApi.getUsers();
+    setIsLastPage(result.lastPage);
+    if (!isFormSended) {
+      setUsers([...users, ...result.users]);
+    }
+  };
+  const resetUserList = async () => {
+    await abzTestApi.resetUsersLink();
+    setIsFormSended(false);
+    setUsers([]);
+  };
 
   return (
     <section className="users" id="users">

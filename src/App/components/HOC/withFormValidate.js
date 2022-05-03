@@ -5,10 +5,8 @@ import {
   validatePhone,
 } from '../../helpers/validateRegEx';
 import { getResolutionFileImg } from '../../helpers/utilities';
-import { initialValues, validateFields} from "./initialValues";
-import abzTestApi from "../../services/api/api";
-
-
+import { initialValues, validateFields } from './initialValues';
+import abzTestApi from '../../services/api/api';
 
 function withFormValidate(WrappedComponent) {
   return function Wrapper(props) {
@@ -25,7 +23,7 @@ function withFormValidate(WrappedComponent) {
         setData({ ...data, [name]: e.target.files[0] });
       }
     };
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
       e.preventDefault();
 
       const isValidate = Object.keys(errors).reduce(
@@ -33,11 +31,10 @@ function withFormValidate(WrappedComponent) {
         true,
       );
       if (isValidate) {
-        console.log('here We Send Data', data);
-        abzTestApi.postUser(data);
-      } else {
-        console.log('no valid data');
+        const status = await abzTestApi.postUser(data);
+        return status;
       }
+      return null;
     };
     const handleBlur = e => {
       const { value, name } = e.currentTarget;

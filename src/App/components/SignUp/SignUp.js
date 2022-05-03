@@ -5,7 +5,7 @@ import withFormValidate from '../HOC/withFormValidate';
 import { initialValues } from '../HOC/initialValues';
 import abzTestApi from '../../services/api/api';
 
-function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
+function SignUp({setIsFormSended, data, errors, handleInput, handleSubmit, handleBlur }) {
   const [fileLabel, setFileLabel] = useState('Upload your photo');
   const [positions, setPositions] = useState([]);
 
@@ -28,10 +28,15 @@ function SignUp({ data, errors, handleInput, handleSubmit, handleBlur }) {
     setFileLabel(newLabel);
   };
 
+  const handleSubmitForm = async e => {
+    const status = await handleSubmit(e);
+    setIsFormSended(status);
+  }
+
   return (
     <section className="sign-up" id="sign-up">
       <h2 className="sign-up__heading heading">Working with POST request</h2>
-      <form action="#" className="sign-up__form" onSubmit={handleSubmit}>
+      <form action="#" className="sign-up__form" onSubmit={handleSubmitForm}>
         <ul className="sign-up__form-field-list">
           <Input
             id="name"

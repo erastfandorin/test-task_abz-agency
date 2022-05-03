@@ -17,7 +17,7 @@ const abzTestApi = {
 
       return parsedResponse.token;
     } catch (err) {
-      console.log(err);
+      toast.error(err);
     }
     return null;
   },
@@ -33,9 +33,12 @@ const abzTestApi = {
       }
       return parsedResponse;
     } catch (err) {
-      console.log(err);
+      toast.error(err);
     }
     return null;
+  },
+  async resetUsersLink() {
+    this.nextUsersLink = '';
   },
   async getUsers() {
     try {
@@ -64,7 +67,7 @@ const abzTestApi = {
 
       return result;
     } catch (err) {
-      console.log(err);
+      toast.error(err);
     }
     return null;
   },
@@ -72,7 +75,7 @@ const abzTestApi = {
     let numberForForm = data.phone.replace(/[^0-9+]/g, '');
     const numberDigitsPhone = 12;
     if (numberForForm.length < numberDigitsPhone) {
-      numberForForm = `38${numberForForm}`;
+      numberForForm = `+38${numberForForm}`;
     }
 
     const formData = new FormData();
@@ -81,7 +84,7 @@ const abzTestApi = {
     formData.append('email', data.email);
     formData.append('phone', numberForForm);
     formData.append('photo', data.photo);
-    
+
     const token = await this.getToken();
     const response = await fetch(`${this.URL}/api/v1/users`, {
       method: 'POST',
@@ -93,6 +96,8 @@ const abzTestApi = {
     if (!parsedResponse.success) {
       toast.warn(`${parsedResponse.message}`);
     }
+
+    return parsedResponse.success
   },
 };
 
