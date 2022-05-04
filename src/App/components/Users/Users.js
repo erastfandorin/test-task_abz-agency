@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import User from './User/User';
 import abzTestApi from '../../services/api/api';
 
-function Users({ isFormSended, setIsFormSended }) {
+function Users({ isFormSended }) {
   const [users, setUsers] = useState([]);
   const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
     getUsers();
   }, [isFormSended]);
+
   const getUsers = async () => {
     if (isFormSended) {
       resetUserList();
@@ -21,9 +22,9 @@ function Users({ isFormSended, setIsFormSended }) {
       setUsers([...users, ...result.users]);
     }
   };
+
   const resetUserList = async () => {
     await abzTestApi.resetUsersLink();
-    setIsFormSended(false);
     setUsers([]);
   };
 

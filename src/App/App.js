@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Poster from './components/Poster/Poster';
 import Users from './components/Users/Users';
 import SignUp from './components/SignUp/SignUp';
+import FormSended from './components/FormSended/FormSended';
 
 function App() {
   const [isFormSended, setIsFormSended] = useState(false);
@@ -16,8 +17,12 @@ function App() {
       <Header />
       <main className="main">
         <Poster />
-        <Users isFormSended={isFormSended} setIsFormSended={setIsFormSended} />
-        <SignUp setIsFormSended={setIsFormSended} />
+        <Users isFormSended={isFormSended} />
+        {!isFormSended ? (
+          <SignUp setIsFormSended={setIsFormSended} />
+        ) : (
+          <FormSended />
+        )}
       </main>
       <ToastContainer
         position="top-right"

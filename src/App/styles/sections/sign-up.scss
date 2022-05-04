@@ -41,7 +41,7 @@
     border: 1px solid $secondary-color;
   }
   &:focus-visible ~ label {
-    color: #00BDD3;
+    color: #00bdd3;
   }
 }
 .select-position__radio-btn-list label {
@@ -80,7 +80,7 @@
     visibility: hidden;
   }
   &:focus::before {
-    border: 1px solid #00BDD3;
+    border: 1px solid #00bdd3;
   }
 }
 .sign-up__input-file-name {
@@ -97,6 +97,11 @@
   text-overflow: ellipsis;
 }
 .sign-up__form-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.sign-up__form-sended-img {
   display: block;
   margin: 0 auto;
 }

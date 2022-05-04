@@ -5,19 +5,31 @@ import withFormValidate from '../HOC/withFormValidate';
 import { initialValues } from '../HOC/initialValues';
 import abzTestApi from '../../services/api/api';
 
-function SignUp({setIsFormSended, data, errors, handleInput, handleSubmit, handleBlur }) {
+function SignUp({
+  setIsFormSended,
+  data,
+  errors,
+  handleInput,
+  handleSubmit,
+  handleBlur,
+}) {
   const [fileLabel, setFileLabel] = useState('Upload your photo');
   const [positions, setPositions] = useState([]);
+  const [isFormFilled, setIsFormFilled] = useState(false);
 
   useEffect(() => {
     (async () => {
       const result = await abzTestApi.getPositions();
       setPositions([...result.positions]);
       // active first radio btn
-      const firstRadioBtn = result.positions[0].id
+      const firstRadioBtn = result.positions[0].id;
       initialValues.position = firstRadioBtn;
     })();
   }, []);
+
+  useEffect(() => {
+    checkFormFilling();
+  }, [data, errors]);
 
   const handleChangeFile = e => {
     handleInput(e);
@@ -31,7 +43,22 @@ function SignUp({setIsFormSended, data, errors, handleInput, handleSubmit, handl
   const handleSubmitForm = async e => {
     const status = await handleSubmit(e);
     setIsFormSended(status);
-  }
+  };
+
+  const checkFormFilling = () => {
+    const dataValues = Object.values(data);
+    const errorsValues = Object.values(errors);
+    const formField = dataValues.findIndex(value => value === '');
+
+    const formValid = errorsValues.findIndex(error => !(error === ''));
+
+    if (formField === -1 && formValid === -1) {
+      setIsFormFilled(true);
+      return null;
+    }
+    setIsFormFilled(false);
+    return null;
+  };
 
   return (
     <section className="sign-up" id="sign-up">
@@ -114,7 +141,14 @@ function SignUp({setIsFormSended, data, errors, handleInput, handleSubmit, handl
             onChange={handleChangeFile}
           />
         </ul>
-        <button type="submit" className="sign-up__form-btn btn btn-disable ">
+        <button
+          type="submit"
+          className={
+            isFormFilled
+              ? 'sign-up__form-btn btn'
+              : 'sign-up__form-btn btn btn-disable'
+          }
+        >
           Sign up
         </button>
       </form>
