@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -11,14 +11,21 @@ import FormSended from './components/FormSended/FormSended';
 
 function App() {
   const [isFormSended, setIsFormSended] = useState(false);
+  const [isUserSignUp, setIsUserSignUp] = useState(false);
+
+  useEffect(() =>{
+    if(isFormSended) {
+      setIsUserSignUp(true);
+    }
+  }, [isFormSended])
 
   return (
     <div className="wrapper">
       <Header />
       <main className="main">
         <Poster />
-        <Users isFormSended={isFormSended} />
-        {!isFormSended ? (
+        <Users isFormSended={isFormSended} setIsFormSended={setIsFormSended} />
+        {!isUserSignUp ? (
           <SignUp setIsFormSended={setIsFormSended} />
         ) : (
           <FormSended />
