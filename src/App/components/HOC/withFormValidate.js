@@ -26,7 +26,7 @@ function withFormValidate(WrappedComponent) {
     const handleSubmit = async e => {
       e.preventDefault();
 
-      const isValidate = Object.keys(errors).reduce(
+      const isValidate = await Object.keys(errors).reduce(
         (sum, item) => sum && validateForm(item, data[item]),
         true,
       );
